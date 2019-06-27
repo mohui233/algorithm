@@ -6,7 +6,7 @@ import java.util.Map;
  * @date 2019/6/26 16:17
  */
 public class Solution3 {
-    public static int lengthOfLongestSubstring(String s) {
+    private static int lengthOfLongestSubstring(String s) {
         int n = s.length(), ans = 0;
         Map<Character, Integer> map = new HashMap<>();
         for (int end = 0, start = 0; end < n; end++) {
