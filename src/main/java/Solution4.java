@@ -5,30 +5,39 @@ import java.util.Arrays;
  * @date 2019/7/3 16:19
  */
 public class Solution4 {
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int a = nums1.length;
-        int b = nums2.length;
-        int length = a + b;
-        int[] nums3 = new int[length];
-        for(int i=0; i<nums1.length; i++){
-            nums3[i] = nums1[i];
+    public static double findMedianSortedArrays(int[] A, int[] B) {
+        int m = A.length;
+        int n = B.length;
+        if (m > n) { // to ensure m<=n
+            int[] temp = A; A = B; B = temp;
+            int tmp = m; m = n; n = tmp;
         }
-        for(int j=0; j<nums2.length; j++){
-            nums3[j+a] = nums2[j];
+        int iMin = 0, iMax = m, halfLen = (m + n + 1) / 2;
+        while (iMin <= iMax) {
+            int i = (iMin + iMax) / 2;
+            int j = halfLen - i;
+            if (i < iMax && B[j-1] > A[i]){
+                iMin = i + 1; // i is too small
+            }
+            else if (i > iMin && A[i-1] > B[j]) {
+                iMax = i - 1; // i is too big
+            }
+            else { // i is perfect
+                int maxLeft = 0;
+                if (i == 0) { maxLeft = B[j-1]; }
+                else if (j == 0) { maxLeft = A[i-1]; }
+                else { maxLeft = Math.max(A[i-1], B[j-1]); }
+                if ( (m + n) % 2 == 1 ) { return maxLeft; }
+
+                int minRight = 0;
+                if (i == m) { minRight = B[j]; }
+                else if (j == n) { minRight = A[i]; }
+                else { minRight = Math.min(B[j], A[i]); }
+
+                return (maxLeft + minRight) / 2.0;
+            }
         }
-        Arrays.sort(nums3);
-        int c = length / 2;
-        int d = length % 2;
-        double g = 0;
-        if(d!=0){
-            int e = nums3[c];
-            g = (float) ((float)e * 1.0);
-        }else {
-            int f = nums3[c-1] + nums3[c];
-            g = (float)f / 2 ;
-        }
-        System.out.println("中位数是："+g);
-        return g;
+        return 0.0;
     }
 
     public static void main(String[] args) {
