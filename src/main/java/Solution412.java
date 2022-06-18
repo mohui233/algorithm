@@ -40,10 +40,8 @@ public class Solution412 {
      */
     public static List<String> fizzBuzz2(int n) {
         List<String> fbList = new ArrayList<>();
-        int j = 0;
         for (int i=1; i<=n; i++ ) {
-            j++;
-            Integer num = Integer.valueOf(j).intValue();
+            Integer num = Integer.valueOf(i).intValue();
             Boolean fizzBoolean = num % 3 == 0;
             Boolean buzzBoolean = num % 5 == 0;
             Boolean fizzBuzzBoolean = fizzBoolean && buzzBoolean;
@@ -57,7 +55,6 @@ public class Solution412 {
                 fbList.add(num.toString());
             }
         }
-        System.out.println(fbList);
         return fbList;
     }
 
@@ -81,7 +78,7 @@ public class Solution412 {
     }
 
     public static void main(String[] args) {
-        fizzBuzz(16);
+        fizzBuzz2(16);
     }
 
 }
