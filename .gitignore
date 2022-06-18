@@ -65,9 +65,6 @@ Servers
 upload
 gen_code
 
-### node ###
-node_modules
-
 JRebel的gitignore：
 ### JRebel ####
 .rebel.*
