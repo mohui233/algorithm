@@ -1,4 +1,6 @@
 /**
+ * 一维数组的动态和
+ *
  * @author wangzhijie
  */
 public class Solution1480 {
