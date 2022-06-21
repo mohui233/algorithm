@@ -65,9 +65,20 @@ public class Solution26 {
         return slow;
     }
 
+    public static int removeDuplicates2(int[] nums) {
+        int t = 0;
+        for (int i = 0; i < nums.length; i ++ ) {
+            if (i == 0 || nums[i] != nums[i - 1]) {
+                nums[t ++ ] = nums[i];
+            }
+        }
+        System.out.println(t);
+        return t;
+    }
+
     public static void main(String[] args) {
         int[] nums = { 1,1,2 };
-        removeDuplicates(nums);
+        removeDuplicates2(nums);
     }
 
 }
