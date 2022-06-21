@@ -29,6 +29,13 @@ public class Solution21 {
      * list1 和 list2 均按 非递减顺序 排列
      *
      */
+
+    /**
+     * 递归
+     * @param list1
+     * @param list2
+     * @return
+     */
     public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if (list1 == null) {
             return list2;
@@ -41,6 +48,33 @@ public class Solution21 {
             list2.next = mergeTwoLists(list1, list2.next);
             return list2;
         }
+    }
+
+    /**
+     * 迭代
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+        ListNode prehead = new ListNode(-1);
+
+        ListNode prev = prehead;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                prev.next = l1;
+                l1 = l1.next;
+            } else {
+                prev.next = l2;
+                l2 = l2.next;
+            }
+            prev = prev.next;
+        }
+
+        // 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可
+        prev.next = l1 == null ? l2 : l1;
+
+        return prehead.next;
     }
 
     public static void main(String[] args) {
@@ -56,7 +90,7 @@ public class Solution21 {
         q1.next = q2;
         q2.next = q3;
 
-        ListNode node = mergeTwoLists(t1, q2);
+        ListNode node = mergeTwoLists2(t1, q2);
         while (node != null) {
             System.out.println(node.val);
             node = node.next;
